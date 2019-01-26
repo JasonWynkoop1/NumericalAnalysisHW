@@ -8,42 +8,41 @@ public class BisectionMethod_Problem2 {
 
     private static int i = 1;
 
+    /**
+     *
+     * @param args - console input
+     */
     public static void main(String[] args){
-
-        /*if(args.length == 0){
-            System.out.println("NEED INTERVAL AND ACCURACY AS INPUTS");
-            System.exit(0);
-         } */
-
         if (args.length < 3) {
-            double initial_a = 1.7;
-            double initial_b = 1.75;
-            double accuracy = .000001;
-            System.out.println("USING DEFAULT INTERVAL OF [" + initial_a + ", " + initial_b + "]");
-            System.out.println("Getting initial interval using the given interval of ["
-                    + initial_a + ", " + initial_b + "].\n");
-
-            System.out.println("The approximate solution is: "
-                    + bisection(initial_a, initial_b, accuracy)
-                    + " after " + i + " iterations.");
+            System.out.println("Enter an interval and then an accuracy to find root!");
+            System.exit(0);
         } else {
-            System.out.println("The approximate solution is: "
-                    + bisection(Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]))
+            double initial_a = Double.parseDouble(args[0]);
+            double initial_b = Double.parseDouble(args[1]);
+            double accuracy = Double.parseDouble(args[2]);
+
+            if((function(initial_a) * function(initial_b)) > 0){
+                System.out.println("Your current interval results in f(a) * f(b) > 0...please try a different one.");
+                System.exit(0);
+            }
+            System.out.println("The approximate solution using the interval [" + initial_a + ", " + initial_b
+                    + "] and an accuracy of " + accuracy + " is "
+                    + bisection(initial_a, initial_b, accuracy)
                     + " after " + i + " iterations.");
         }
     }
 
     /**
      *
-     * @param a - initial point a
-     * @param b - initial point b
+     * @param a - initial  a
+     * @param b - initial  b
      * @param c - accuracy given
      * @return - Approximation for the solution
      */
     private static double bisection(double a, double b, double c){
         //setting tolerance
         //getting sign for a
-        double FA = Math.pow(a, 2) - 3;
+        double FA = function(a);
 
         int maxRuns = 100;
 
@@ -53,7 +52,7 @@ public class BisectionMethod_Problem2 {
             //setting midpoint
             double p = a + (b - a) / 2;
 
-            double FP = Math.pow(p, 2) - 3;
+            double FP = function(p);
 
             if ((FP == 0) || (Math.abs((b - a)) <= c)) {
                 return p;
@@ -67,12 +66,16 @@ public class BisectionMethod_Problem2 {
                 b = p;
             }
 
-            System.out.println("New interval: [" + a + ", " + b + "]");
+            System.out.println("[" + a + ", " + b + "]");
         }
 
         System.out.println("Method failed after " + maxRuns + " iterations.");
 
         return -1;
+    }
+
+    private static double function(double x){
+        return Math.pow(x, 2) - 3;
     }
 
 
