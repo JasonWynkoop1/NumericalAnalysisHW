@@ -1,30 +1,34 @@
 public class NewtonsMethod_Problem1 {
 
     private static int[] TOL = {1, 3, 5, 7, 11};
-    private static double p0 = 1.5;
+    private static double p0 = 1.2;
+    private static String tableFormat = "|  %-4s   | %-4f  |   %-4f   |%n";
+    private static int maxRuns = 200;
 
     public static void main(String[] args) {
-        System.out.println("Here we go");
+
         for (int i = 0; i < TOL.length; i++) {
-            newtonsMethod(i);
+            System.out.println("ZERO FOUND AT: " + newtonsMethod(TOL[i])
+                    + " WITH ACCURACY OF: " + Math.pow(10, -TOL[i]) + "\n");
         }
+
     }
 
-    private static void newtonsMethod(int a) {
-        int i = 1;
-        double p = p0 - (function(p0) / functionPrime(p0));
-        double accuracy = Math.pow(10, -a);
-        System.out.println(accuracy);
-        int maxRuns = 200;
-        while (i <= maxRuns) {
-            if (Math.abs(p - p0) < accuracy) {
-                System.out.println("Step" + i + ": " + p);
-                break;
-            }
+    private static double newtonsMethod(int accuracy) {
 
-            i = i + 1;
-            p0 = p;
+        int i = 1;
+
+        while (i <= maxRuns) {
+            double p = p0 - (function(p0) / functionPrime(p0));
+            if (Math.abs(p - p0) < Math.pow(10, -accuracy)) {
+                return p;
+            } else {
+                System.out.println(i + ")" + p);
+                i++;
+                p0 = p;
+            }
         }
+        return -1;
     }
 
     /**
