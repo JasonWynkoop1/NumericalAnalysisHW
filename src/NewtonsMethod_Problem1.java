@@ -14,6 +14,11 @@ public class NewtonsMethod_Problem1 {
     private static int[] TOL = {1, 3, 5, 7, 11};
     private static double p0 = 1.5;
 
+    /**
+     * Main method that loops through each k value once a X is found for each tolerance.
+     *
+     * @param args - none
+     */
     public static void main(String[] args) {
 
         for (int i = 0; i < TOL.length; i++) {
@@ -25,6 +30,11 @@ public class NewtonsMethod_Problem1 {
 
     }
 
+    /**
+     * Newton's Method
+     * @param accuracy - tolerance
+     * @return - zero
+     */
     private static double newtonsMethod(int accuracy) {
 
         int i = 1;
@@ -32,7 +42,7 @@ public class NewtonsMethod_Problem1 {
         int maxRuns = 200;
         while (i <= maxRuns) {
             double p = p0 - (function(p0) / functionPrime(p0));
-            String format = "%4d  %4f  %4f%n";
+            String format = "%4d  %4f  %10.15f%n";
             if (Math.abs(p - p0) <= Math.pow(10, -accuracy)) {
                 System.out.format(format, i, p0, p);
                 p0 = 1.5;
