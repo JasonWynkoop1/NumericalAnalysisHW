@@ -11,7 +11,7 @@
  */
 public class NewtonsMethod_Problem1 {
 
-    private static int[] TOL = {1, 3, 5, 7, 11};
+    private static final int[] TOL = {1, 3, 5, 7, 11};
     private static double p0 = 1.5;
 
     /**
@@ -21,11 +21,11 @@ public class NewtonsMethod_Problem1 {
      */
     public static void main(String[] args) {
 
-        for (int i = 0; i < TOL.length; i++) {
+        for (int aTOL : TOL) {
 
             System.out.printf("%4s  %5s  %10s%n", "i", "p0", "p");
-            System.out.println("ZERO APPROXIMATION FOUND AT: " + newtonsMethod(TOL[i])
-                    + "\nWITH ACCURACY OF: " + Math.pow(10, -TOL[i]) + "\n");
+            System.out.println("ZERO APPROXIMATION FOUND AT: " + newtonsMethod(aTOL)
+                    + "\nWITH ACCURACY OF: " + Math.pow(10, -aTOL) + "\n");
         }
 
     }

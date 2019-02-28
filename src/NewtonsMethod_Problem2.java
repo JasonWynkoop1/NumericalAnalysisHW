@@ -8,7 +8,6 @@ public class NewtonsMethod_Problem2 {
 
     private static int i = 1;
     private static double p0 = 2;
-    private static int maxRuns = 200;
 
     public static void main(String[] args) {
         System.out.println("VALUE OF X: " + newtonsMethod());
@@ -21,6 +20,7 @@ public class NewtonsMethod_Problem2 {
      * @return - zero
      */
     private static double newtonsMethod() {
+        int maxRuns = 200;
         while (i < maxRuns) {
             double p = p0 - (function(p0) / functionPrime(p0));
             if (Math.abs(p - p0) < Math.pow(10, -4)) {
